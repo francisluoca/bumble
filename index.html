@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta name="bumbleton-code" content="BUMBLE-XVURHC9S">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My Robot Game</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100svh; display: grid; place-items: center; padding: 24px; background: #f4eddb; color: #202d28; font-family: 'Trebuchet MS', sans-serif; }
+    main { width: min(720px, 100%); text-align: center; border: 3px solid #202d28; border-radius: 32px; padding: clamp(28px, 7vw, 64px) 24px; background: #c7e5d0; box-shadow: 10px 10px 0 #202d28; }
+    .label { font: bold 13px monospace; letter-spacing: .18em; text-transform: uppercase; }
+    h1 { font-size: clamp(40px, 8vw, 70px); line-height: 1.05; letter-spacing: -.05em; margin: 25px 0; }
+    .robot { width: 140px; height: 108px; margin: 40px auto 30px; position: relative; border: 3px solid #202d28; border-radius: 25px; background: #f4eddb; box-shadow: 6px 6px 0 #202d28; }
+    .robot::before { content: ''; position: absolute; width: 4px; height: 25px; background: #202d28; left: calc(50% - 2px); top: -28px; }
+    .robot::after { content: ''; position: absolute; width: 16px; height: 16px; border: 3px solid #202d28; border-radius: 50%; background: #ed8866; left: calc(50% - 8px); top: -39px; }
+    .eyes { display: flex; justify-content: space-evenly; margin-top: 28px; }
+    .eye { width: 16px; height: 19px; border-radius: 5px; background: #202d28; }
+    .mouth { width: 33px; height: 12px; border-bottom: 3px solid #202d28; border-radius: 50%; margin: 14px auto; }
+    button { padding: 18px 58px; border: 3px solid #202d28; border-radius: 100px; background: #f6c659; color: #202d28; font: 900 30px 'Trebuchet MS', sans-serif; box-shadow: 0 6px 0 #202d28; cursor: pointer; }
+    button:hover { background: #ffda7d; }
+    button:active { transform: translateY(5px); box-shadow: 0 1px 0 #202d28; }
+    button:focus-visible { outline: 4px solid #202d28; outline-offset: 7px; }
+    #status { min-height: 24px; margin: 28px 0 0; font-size: 16px; }
+    .awake { background: #f6c659; transform: rotate(-5deg); }
+    @media (prefers-reduced-motion: no-preference) { .robot { transition: transform .2s, background .2s; } }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="label">My Robot Game · Ready to play</div>
+    <div class="robot" role="img" aria-label="A friendly little robot"><div class="eyes"><span class="eye"></span><span class="eye"></span></div><div class="mouth"></div></div>
+    <h1>Press the button!</h1>
+    <button type="button" id="go">GO</button>
+    <p id="status" aria-live="polite">One small button. One big adventure.</p>
+  </main>
+  <script>
+    let count = 0;
+    document.getElementById('go').addEventListener('click', () => {
+      count += 1;
+      document.querySelector('.robot').classList.toggle('awake');
+      document.getElementById('status').textContent = count === 1 ? 'Beep boop! Your robot is awake!' : `Beep boop! Robot power: ${count}!`;
+    });
+  </script>
+</body>
+</html>
